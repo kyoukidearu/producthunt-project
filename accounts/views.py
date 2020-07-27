@@ -1,3 +1,32 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import auth
+from django.contrib.auth.models import User
 
 # Create your views here.
+def signup(request):
+    if request.method == 'POST':
+        if request.POST['password1'] == request.POST['password2']:
+            # user has info to send and make account with, if user already exists
+            # this will reopen signup.html with error message
+            try:
+                user = User.objects.get(username=request.POST['username'])
+                return render(request, 'accounts/signup.html', {'error':'Username already taken'})
+            except User.DoesNotExist:
+                # new username so create user
+                user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
+                auth.login(request,user)
+                return redirect('home')
+        else:
+            return render(request, 'accounts/signup.html', {'error':'Passwords do not match'})
+    else:
+        # user wants to open signup page thus a get
+        return render(request, 'accounts/signup.html')
+
+    return render(request, 'accounts/signup.html')
+
+def login(request):
+    return render(request, 'accounts/login.html')
+
+#TO DO need to route to homepage and logout account
+def logout(request):
+    return render(request, 'accounts/signup.html')  #for now
