@@ -11,7 +11,7 @@
 
 <h1>Product</h1>
 <br>
-  <form method="POST" action="{% url 'create' %}" id="createform">
+  <form method="POST" action="{% url 'create' %}" id="createform" enctype="multipart/form-data">
     {% csrf_token %}
     <font size="+2">Title:</font>
     <br>
@@ -20,7 +20,36 @@
     <br>
     <font size="+2">Body:</font>
     <br>
-    <textarea rows="5" cols="75" name="body" form="createform"></textarea>
+    <textarea rows="5" cols="75" name="body"></textarea>
+    <br>
+    <br>
+    <font size="+2">URL:</font>
+    <br>
+    <input type="text" name="url" />
+    <br>
+    <font size="+2">Icon:</font>
+    <br>
+    <input type="file" name="icon" />
+    <br>
+    <font size="+2">Image:</font>
+    <br>
+    <input type="file" name="image" />
+    <!--<input type="text" name="body" />
+    <br>
+    <br>
+    <font size="+2">URL:</font>
+    <br>
+    <input type="text" name="url" />
+    <br>
+    <font size="+2">Icon:</font>
+    <br>
+    <input type="file" name="icon" />
+    <br>
+    <font size="+2">Image:</font>
+    <br>
+    <input type="file" name="image" />-->
+  </form>
+    <!--<textarea rows="5" cols="75" name="body" form="createform"></textarea>
     <br>
     <br>
     <font size="+2">URL:</font>
@@ -33,8 +62,8 @@
     <br>
     <font size="+2">Image:</font>
     <br>
-    <input type="file" name="image" form="createform" />
-  </form>
+    <input type="file" name="image" form="createform" />-->
+
     <br>
     <br>
     <input class="btn btn-primary" type="submit" value="Add Product" form="createform"/>
